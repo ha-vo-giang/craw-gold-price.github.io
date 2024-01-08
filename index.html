@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./lib/font-awesome.min.css">
+  <link rel="stylesheet" href="./lib/bootstrap.min.css">
+  <link href="./assets/styles.css" rel="stylesheet">
+  <title>Hello, world!</title>
+</head>
+
+<body style="background: #454d55;">
+  <div style="height: 100%; overflow:auto;" class="table-scroll">
+    <table class="table table-bordered table-dark table-sm">
+      <tbody id="data_row">
+        <tr>
+          <td colspan="100">
+            <table id="tableBalance"
+              class="table table-bordered table-hover table-sm table-dark table-history">
+              
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="100">
+            <table id="tablePosition"
+              class="table table-bordered table-hover table-sm table-dark table-history">
+              <thead>
+                <tr style=" position: sticky; top: -1px; z-index: 9; background: #343a40; ">
+                  <th>#</th>
+                  <th>Symbol</th>
+                  <th>Side</th>
+                  <th>Pnl</th>
+                  <th>Cost</th>
+                  <th>Close/Dca</th>
+                  <th>PNL Max/Min</th>
+                  <th>IndexDca</th>
+                  <th>MarkPrice</th>
+                  <th>EntryPrice</th>
+                  <th>TotalBalance</th>
+                  <th class="col_fixed"></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr style="height: 100%;">
+          <td colspan="100">
+            <div>
+              <table id="table-history" class="table table-bordered table-hover table-sm table-dark table-history">
+                <thead>
+                  <tr style=" position: sticky; top: -1px; z-index: 9; background: #343a40; ">
+                    <th>#</th>
+                    <th>Time</th>
+                    <th>Account</th>
+                    <th>Action</th>
+                    <th>Symbol</th>
+                    <th>Side</th>
+                    <th>Cost</th>
+                    <th>ExpectedPnl</th>
+                    <th>ActualPnl (USD)</th>
+                    <th>ActualPnl (VND)</th>
+                    <th class="col_fixed"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./lib/jquery-3.7.1.min.js"></script>
+  <script src="./lib/popper.min.js"></script>
+  <script src="./lib/bootstrap.min.js"></script>
+  <script src="./lib/moment.min.js"></script>
+  <script src="./lib/socket.io.min.js"></script>
+  <script src="./renderer.js"></script>
+</body>
+
+</html>
