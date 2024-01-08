@@ -9,6 +9,20 @@
     animation: spin 2s linear infinite;
 }
 
+span.inline {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+span.inline-right {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+    font-size: 23px;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
     0% {

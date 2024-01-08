@@ -18,6 +18,10 @@ eventSource.onopen = function(event) {
   console.log('Connection opened');
 };
 
+setInterval(() => {
+  $('.time_current').text(moment().format("DD/MM/YYYY HH:mm:ss"))
+}, 200);
+
 function renderData(data) {
   let resultGroup = groupBy(data.objectSocket, (c) => c.type)
   let html_reference_gold_price = ''
