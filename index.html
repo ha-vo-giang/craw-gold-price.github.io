@@ -13,74 +13,58 @@
   <title>Hello, world!</title>
 </head>
 
-<body style="background: #454d55;">
-  <div style="height: 100%; overflow:auto;" class="table-scroll">
-    <table class="table table-bordered table-dark table-sm">
-      <tbody id="data_row">
+<body>
+  <div class="container">
+    <h2>Giá Vàng Tham Khảo</h2>
+    <table id="reference_gold_price" class="table table-sm table-dark">
+      <thead>
         <tr>
-          <td colspan="100">
-            <table id="tableBalance"
-              class="table table-bordered table-hover table-sm table-dark table-history">
-              
-            </table>
-          </td>
+          <th scope="col">Loại</th>
+          <th scope="col">Giá Mua</th>
+          <th scope="col">Giá Bán</th>
+          <th scope="col">+/-</th>
+          <th scope="col">Chênh lệch</th>
         </tr>
-        <tr>
-          <td colspan="100">
-            <table id="tablePosition"
-              class="table table-bordered table-hover table-sm table-dark table-history">
-              <thead>
-                <tr style=" position: sticky; top: -1px; z-index: 9; background: #343a40; ">
-                  <th>#</th>
-                  <th>Symbol</th>
-                  <th>Side</th>
-                  <th>Pnl</th>
-                  <th>Cost</th>
-                  <th>Close/Dca</th>
-                  <th>PNL Max/Min</th>
-                  <th>IndexDca</th>
-                  <th>MarkPrice</th>
-                  <th>EntryPrice</th>
-                  <th>TotalBalance</th>
-                  <th class="col_fixed"></th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr style="height: 100%;">
-          <td colspan="100">
-            <div>
-              <table id="table-history" class="table table-bordered table-hover table-sm table-dark table-history">
-                <thead>
-                  <tr style=" position: sticky; top: -1px; z-index: 9; background: #343a40; ">
-                    <th>#</th>
-                    <th>Time</th>
-                    <th>Account</th>
-                    <th>Action</th>
-                    <th>Symbol</th>
-                    <th>Side</th>
-                    <th>Cost</th>
-                    <th>ExpectedPnl</th>
-                    <th>ActualPnl (USD)</th>
-                    <th>ActualPnl (VND)</th>
-                    <th class="col_fixed"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
+      </thead>
+      <tbody>
+        <td colspan="100"><div class="loader"></div></td>
       </tbody>
     </table>
   </div>
-
-
+  <div class="container">
+    <h2>Giá Vàng SJC Trong Nước</h2>
+    <table id="domestic_sjc" class="table table-sm table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Tổ Chức</th>
+          <th scope="col">Giá Mua</th>
+          <th scope="col">Giá Bán</th>
+          <th scope="col">+/-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td colspan="100"><div class="loader"></div></td>
+      </tbody>
+    </table>
+  </div>
+  <div class="container">
+    <h2>Ngoại Tệ Tham Khảo</h2>
+    <table id="foreign_currency_reference" class="table table-sm table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Tổ Chức</th>
+          <th scope="col">Mua</th>
+          <th scope="col">Bán</th>
+          <th scope="col">Tỷ giá/USD</th>
+          <th scope="col">+/-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td colspan="100"><div class="loader"></div></td>
+      </tbody>
+    </table>
+  </div>
+  
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="./lib/jquery-3.7.1.min.js"></script>
