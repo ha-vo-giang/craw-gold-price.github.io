@@ -65,7 +65,6 @@ function renderData(data) {
   $("#reference_gold_price tbody").html(html_reference_gold_price)
   $("#domestic_sjc tbody").html(html_domestic_sjc)
   $("#foreign_currency_reference tbody").html(html_foreign_currency_reference)
-  console.log(data)
 }
 
 function groupBy(xs, f) {
