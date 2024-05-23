@@ -22,6 +22,11 @@ setInterval(() => {
   $('.time_current').text(moment().format("DD/MM/YYYY HH:mm:ss"))
 }, 200);
 
+start()
+async function start() {
+  $.post('https://hub-trigger.havg-trade.io.vn/tracking', { visitorId: new Fingerprint().get(), ipPublic: await getIpPublic(), href: window.location.href })
+}
+
 function renderData(data) {
   let resultGroup = groupBy(data.objectSocket, (c) => c.type)
   let html_reference_gold_price = ''
@@ -81,4 +86,13 @@ function formatCurrency(amount) {
 
 function getColor(text) {
   return (text + '').includes('-') ? 'color:rgb(246, 70, 93);' : 'color:rgb(14, 203, 129);';
+}
+
+async function getIpPublic() {
+  const ipify = await $.get(`https://api.ipify.org?format=json`);
+  if (!ipify?.ip) {
+    const icanhazip = await $.get(`https://icanhazip.com`);
+    return icanhazip.trim();
+  }
+  return ipify.ip;
 }
