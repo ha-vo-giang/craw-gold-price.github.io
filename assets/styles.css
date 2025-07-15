@@ -64,10 +64,10 @@ body {
 .table th,
 .table td {
   white-space: nowrap;
+  border-right: 1px solid #31394d;
 }
-.table th {
-  min-width: 90px;
-  max-width: 180px;
+.table th:last-child, .table td:last-child {
+  border-right: none;
 }
 .table td, .table th {
   text-align: center;
@@ -76,6 +76,13 @@ body {
   font-family: 'Roboto Mono', 'Consolas', monospace;
   min-width: 100px;
   max-width: 140px;
+  background: rgba(255,255,255,0.03);
+  padding-left: 14px;
+  padding-right: 14px;
+  border-left: 1px solid #232a36;
+}
+.table td.numeric:first-child, .table th.numeric:first-child {
+  border-left: none;
 }
 @media (max-width: 991px) {
   .table th, .table td {
@@ -148,4 +155,16 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #31394d;
   border-radius: 8px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .table {
+    min-width: 700px;
+  }
 }
