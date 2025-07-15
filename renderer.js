@@ -3,80 +3,150 @@ const type = {
   ngoai_te: 'NGOAI_TE'
 }
 
-var eventSource = new EventSource('https://api.vangsaigon.vn/api/server-sent-events/get-price');
+const ws = new WebSocket('wss://services.vang247.vn/ws-prices/ws/v1/prices');
 
-eventSource.onmessage = function (event) {
-    let data = JSON.parse(event.data)
-    renderData(data)
+ws.onmessage = function(event) {
+  let data = JSON.parse(event.data);
+  renderAllTables(data);
 };
 
-eventSource.onerror = function(error) {
-  console.error('Encountered error: ' + error);
-};
-
-eventSource.onopen = function(event) {
-  console.log('Connection opened');
+ws.onerror = function(error) {
+  console.error('WebSocket error:', error);
 };
 
 setInterval(() => {
   $('.time_current').text(moment().format("DD/MM/YYYY HH:mm:ss"))
 }, 200);
 
-function renderData(data) {
-  let resultGroup = groupBy(data.objectSocket, (c) => c.type)
-  let html_reference_gold_price = ''
-  let html_domestic_sjc = ''
-  let html_foreign_currency_reference = ''
-
-  resultGroup[type.vang].forEach(value => {
-    if(value.name === 'Vàng TG') value.gPA = 0
+function renderAllTables(data) {
+  // 1. Giá vàng tham khảo (vsg_gold_table + goldenFund95, goldenFund99)
+  let html_reference_gold_price = '';
+  if (data.vsg_gold_table) {
+    data.vsg_gold_table.forEach(row => {
+      html_reference_gold_price += `
+        <tr>
+          <th>${row.name}</th>
+          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+        </tr>
+      `;
+    });
+  }
+  // Bổ sung goldenFund95, goldenFund99 nếu có
+  if (data.goldenFund95) {
+    const row = data.goldenFund95;
     html_reference_gold_price += `
-    <tr>
-      <th>${value.name}</th>
-      <td>${formatHtmlCurrency(value.buy)}</td>
-      <td>${formatHtmlCurrency(value.sell)}</td>
-      <td style="${getColor(value.changePercent)}">${value.changePercent}</td>
-      <td style="${getColor(value.gPA)}">${formatHtmlCurrency(value.gPA)}</td>
-    </tr>
-    `
-  });
-  data.objectApi.goldScjTcNh.forEach(value => {
-    html_domestic_sjc += `
-    <tr>
-      <th>${value.name}</th>
-      <td>${formatHtmlCurrency(value.buy)}</td>
-      <td>${formatHtmlCurrency(value.sell)}</td>
-      <td style="${getColor(value.change)}">${formatHtmlCurrency(value.change)}</td>
-    </tr>
-    `
-  });
-  resultGroup[type.ngoai_te].forEach(value => {
-    html_foreign_currency_reference += `
-    <tr>
-      <th><span><img src="${value.imageUrl}" alt="PHP" width="14" height=""> ${value.name}</span></th>
-      <td>${formatHtmlCurrency(value.buy)}</td>
-      <td>${formatHtmlCurrency(value.sell)}</td>
-      <td style="${getColor(value.price)}">${formatHtmlCurrency(value.price)}</td>
-      <td style="${getColor(value.changePercent)}">${value.changePercent}</td>
-    </tr>
-    `
-  });
+      <tr>
+        <th>${row.name}</th>
+        <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+        <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+        <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+      </tr>
+    `;
+  }
+  if (data.goldenFund99) {
+    const row = data.goldenFund99;
+    html_reference_gold_price += `
+      <tr>
+        <th>${row.name}</th>
+        <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+        <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+        <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+      </tr>
+    `;
+  }
+  $("#reference_gold_price tbody").html(html_reference_gold_price);
 
-  $("#reference_gold_price tbody").html(html_reference_gold_price)
-  $("#domestic_sjc tbody").html(html_domestic_sjc)
-  $("#foreign_currency_reference tbody").html(html_foreign_currency_reference)
-}
+  // 2. Giá vàng toàn quốc (goldNationWide)
+  let html_gold_nationwide = '';
+  if (data.goldNationWide) {
+    data.goldNationWide.forEach(row => {
+      html_gold_nationwide += `
+        <tr>
+          <th>${row.name}</th>
+          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        </tr>
+      `;
+    });
+  }
+  $("#gold_nationwide tbody").html(html_gold_nationwide);
 
-function groupBy(xs, f) {
-  return xs.reduce((r, v, i, a, k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
+  // 3. Giá vàng SJC trong nước (sjcNationWide)
+  let html_domestic_sjc = '';
+  if (data.sjcNationWide) {
+    data.sjcNationWide.forEach(row => {
+      html_domestic_sjc += `
+        <tr>
+          <th>${row.name}</th>
+          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        </tr>
+      `;
+    });
+  }
+  // Nếu muốn giữ bảng cũ chỉ có Sài Gòn, hãy điều chỉnh lại html và bảng tương ứng
+  $("#domestic_sjc tbody").html(html_domestic_sjc);
+
+  // 4. Ngoại tệ tham khảo (currencyNationWide)
+  let html_foreign_currency_reference = '';
+  if (data.currencyNationWide) {
+    data.currencyNationWide.forEach(row => {
+      html_foreign_currency_reference += `
+        <tr>
+          <th>${row.name}</th>
+          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td>${row.rate ? formatHtmlCurrency(row.rate) : 0}</td>
+        </tr>
+      `;
+    });
+  }
+  $("#foreign_currency_reference tbody").html(html_foreign_currency_reference);
+
+  // 5. Giá bạc tham khảo (silver_price)
+  let html_silver_reference = '';
+  if (data.silver_price) {
+    data.silver_price.forEach(row => {
+      html_silver_reference += `
+        <tr>
+          <th>${row.name}</th>
+          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        </tr>
+      `;
+    });
+  }
+  $("#silver_reference tbody").html(html_silver_reference);
 }
 
 function formatHtmlCurrency(amount) {
+  if (amount === null || amount === undefined || isNaN(amount)) return '-';
   return formatCurrency(amount);
 }
 
 function formatCurrency(amount) {
-  return amount.toLocaleString('en-US');
+  return Number(amount).toLocaleString('en-US');
 }
 
 function getColor(text) {
