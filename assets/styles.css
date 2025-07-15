@@ -60,6 +60,46 @@ body {
   font-size: 1rem;
 }
 
+/* Cố định độ rộng các cột bảng và font số */
+.table th,
+.table td {
+  white-space: nowrap;
+}
+.table th {
+  min-width: 90px;
+  max-width: 180px;
+}
+.table td, .table th {
+  text-align: center;
+}
+.table td.numeric, .table th.numeric {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  min-width: 100px;
+  max-width: 140px;
+}
+@media (max-width: 991px) {
+  .table th, .table td {
+    min-width: 60px;
+    max-width: 120px;
+  }
+  .table td.numeric, .table th.numeric {
+    min-width: 70px;
+    max-width: 100px;
+  }
+}
+@media (max-width: 767px) {
+  .table th, .table td {
+    min-width: 48px;
+    max-width: 80px;
+    font-size: 0.8rem;
+  }
+  .table td.numeric, .table th.numeric {
+    min-width: 48px;
+    max-width: 80px;
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 991px) {
   .table thead th, .table tbody td, .table tbody th {
     font-size: 0.95rem;

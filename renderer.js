@@ -26,10 +26,10 @@ function renderAllTables(data) {
       html_reference_gold_price += `
         <tr>
           <th>${row.name}</th>
-          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
-          <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td class="numeric" style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
         </tr>
       `;
     });
@@ -40,10 +40,10 @@ function renderAllTables(data) {
     html_reference_gold_price += `
       <tr>
         <th>${row.name}</th>
-        <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-        <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-        <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
-        <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+        <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+        <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+        <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        <td class="numeric" style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
       </tr>
     `;
   }
@@ -52,10 +52,10 @@ function renderAllTables(data) {
     html_reference_gold_price += `
       <tr>
         <th>${row.name}</th>
-        <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-        <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-        <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
-        <td style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
+        <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+        <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+        <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+        <td class="numeric" style="${getColor(row.gap)}">${formatHtmlCurrency(row.gap)}</td>
       </tr>
     `;
   }
@@ -68,12 +68,12 @@ function renderAllTables(data) {
       html_gold_nationwide += `
         <tr>
           <th>${row.name}</th>
-          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
-          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
-          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
-          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td class="numeric" style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
         </tr>
       `;
     });
@@ -87,12 +87,12 @@ function renderAllTables(data) {
       html_domestic_sjc += `
         <tr>
           <th>${row.name}</th>
-          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
-          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
-          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
-          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td class="numeric" style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
         </tr>
       `;
     });
@@ -107,13 +107,13 @@ function renderAllTables(data) {
       html_foreign_currency_reference += `
         <tr>
           <th>${row.name}</th>
-          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
-          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
-          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
-          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
-          <td>${row.rate ? formatHtmlCurrency(row.rate) : 0}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td class="numeric" style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td class="numeric">${row.rate ? formatHtmlCurrency(row.rate) : 0}</td>
         </tr>
       `;
     });
@@ -127,12 +127,12 @@ function renderAllTables(data) {
       html_silver_reference += `
         <tr>
           <th>${row.name}</th>
-          <td>${formatHtmlCurrency(row.hanoi.buy)}</td>
-          <td>${formatHtmlCurrency(row.hanoi.sell)}</td>
-          <td style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
-          <td>${formatHtmlCurrency(row.saigon.buy)}</td>
-          <td>${formatHtmlCurrency(row.saigon.sell)}</td>
-          <td style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.hanoi.sell)}</td>
+          <td class="numeric" style="${getColor(row.hanoi.buy_change)}">${formatHtmlCurrency(row.hanoi.buy_change)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.buy)}</td>
+          <td class="numeric">${formatHtmlCurrency(row.saigon.sell)}</td>
+          <td class="numeric" style="${getColor(row.saigon.buy_change)}">${formatHtmlCurrency(row.saigon.buy_change)}</td>
         </tr>
       `;
     });
