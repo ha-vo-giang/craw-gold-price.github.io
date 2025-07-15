@@ -1,45 +1,111 @@
+/* Reset & base */
+body {
+  background: #181c24;
+  color: #f5f6fa;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.table {
+  background: #232a36;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+  margin-bottom: 32px;
+}
+
+.table thead th {
+  background: #232a36;
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 2px solid #31394d;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.table tbody th, .table tbody td {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
+  padding: 10px 6px;
+  border-bottom: 1px solid #232a36;
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+  background: #232a36cc;
+  box-shadow: 0 2px 8px 0 rgba(255, 215, 0, 0.05);
+}
+
+.inline {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffd700;
+}
+
+.inline-right {
+  float: right;
+  color: #aaa;
+  font-size: 1rem;
+}
+
+@media (max-width: 991px) {
+  .table thead th, .table tbody td, .table tbody th {
+    font-size: 0.95rem;
+    padding: 8px 2px;
+  }
+  .container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .table thead th, .table tbody td, .table tbody th {
+    font-size: 0.85rem;
+    padding: 6px 1px;
+  }
+  .container {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .inline {
+    font-size: 1rem;
+  }
+}
+
+/* Loader cải tiến */
 .loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    /* Safari */
-    animation: spin 2s linear infinite;
+  border: 4px solid #31394d;
+  border-top: 4px solid #ffd700;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
-
-span.inline {
-    display: inline-block;
-    font-weight: bold;
-    font-size: 23px;
-}
-
-span.inline-right {
-    display: inline-block;
-    width: 100%;
-    text-align: right;
-    font-weight: bold;
-    font-size: 23px;
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-    100% {
-        transform: rotate(360deg);
-    }
+/* Scrollbar đẹp */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #232a36;
+}
+::-webkit-scrollbar-thumb {
+  background: #31394d;
+  border-radius: 8px;
 }
