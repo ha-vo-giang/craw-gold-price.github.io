@@ -7,6 +7,7 @@ const socket = io('https://ato.io.vn');
 socket.on('vang247:prices:response', (data) => {
     renderAllTables(data.data)
 });
+socket.emit('vang247:prices:get')
 
 setInterval(() => {
   $('.time_current').text(moment().format("DD/MM/YYYY HH:mm:ss"))
