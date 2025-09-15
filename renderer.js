@@ -3,16 +3,10 @@ const type = {
   ngoai_te: 'NGOAI_TE'
 }
 
-const ws = new WebSocket('wss://services.vang247.vn/ws-prices/ws/v1/prices');
-
-ws.onmessage = function(event) {
-  let data = JSON.parse(event.data);
-  renderAllTables(data);
-};
-
-ws.onerror = function(error) {
-  console.error('WebSocket error:', error);
-};
+const socket = io('https://ato.io.vn');
+socket.on('vang247:prices:response', (data) => {
+    renderAllTables(data.data)
+});
 
 setInterval(() => {
   $('.time_current').text(moment().format("DD/MM/YYYY HH:mm:ss"))
